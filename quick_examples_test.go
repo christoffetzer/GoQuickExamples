@@ -11,7 +11,7 @@ import (
     "math"
     "testing"
     "testing/quick"
-    "github.com/christoffetzer/extremeValues"
+    "github.com/christoffetzer/extreme"
 )
 
 func TestAbs1(t *testing.T) {
@@ -71,7 +71,7 @@ func TestAbs3e(t *testing.T) {
 	f := func(x int8) bool {
 		return Abs3(x) >= 0
 	}
-	if err := quick.Check(f, &quick.Config{Values: extremeValues.ExtremeValues(f)}); err != nil {
+	if err := quick.Check(f, &quick.Config{Values: extreme.Values(f)}); err != nil {
 		t.Error(err)
 	}
 }
@@ -79,9 +79,9 @@ func TestAbs3e(t *testing.T) {
 // TestAbs2e uses a combination of extreme and random values
 func TestAbs2e(t *testing.T) {
 	f := func(x int) bool {
-		return Abs2(x) >= 0
+		return Abs2(x) >= 0       // post-condition of Abs2
 	}
-	if err := quick.Check(f, &quick.Config{Values: extremeValues.ExtremeValues(f)}); err != nil {
+	if err := quick.Check(f, &quick.Config{Values: extreme.Values(f)}); err != nil {
 		t.Error(err)
 	}
 }
